@@ -7,17 +7,18 @@ using namespace std;
 class BisectionMethod
 {
     // for function     ax^2 + bx + c = 0;
-    private :
-    
+    private :    
     int a,b,c;
     double root;
     int NoOfIterations = 100;
-    double temp1,temp2,tempc;
+    double range_1,range_2,tempc;
     
     
     public:
     BisectionMethod(){}
-    BisectionMethod(int a,int b, int c): a(a),b(b),c(c), root(-1.0){temp1=6; temp2= 7; tempc = 0;}
+
+    BisectionMethod(int a,int b, int c): a(a),b(b),c(c), root(-1.0){range_1=6; range_2= 7; tempc = 0;}
+
     double FunctionVal(double x)
     {
         
@@ -27,13 +28,13 @@ class BisectionMethod
     bool CalculateRoot()
     {   
       
-        if((FunctionVal(temp1) * FunctionVal(temp2) )> 0 ) return false;
+        if((FunctionVal(range_1) * FunctionVal(range_2) )> 0 ) return false;
         while(NoOfIterations>0)
         {
         
               
-        tempc= (temp1 + temp2)/2;
-        if((FunctionVal(tempc)>0 )&& (FunctionVal(temp1)<0)) {temp2 = tempc;} else {temp1 = tempc;}
+        tempc= (range_1 + range_2)/2;
+        if((FunctionVal(tempc)>0 )&& (FunctionVal(range_1)<0)) {range_2 = tempc;} else {range_1 = tempc;}
          
         NoOfIterations--;
             
@@ -82,11 +83,31 @@ int main ()
     BisectionMethod SqFxn(a,b,c);
     if(SqFxn.CalculateRoot()) SqFxn.displayRoot(); else { cout << "Error !! "<<endl;}
 
-    vector<vector<int>> Val = {{2,3},{3,6},{4,12},{5,24}};
+    vector<vector<float>> Val = {{2,3},{3,6},{4,12},{5,24}};
     Interpolation Intp;
     Intp.CreateFxn();
     cout << " Val : " << Intp.ValueAt(3);
 
 
-} //cout<<"Before ::" <<"Temp1 : "<<temp1<<" Temp2: "<<temp2<< " Tempc: " << tempc << " Fxn val : "<< FunctionVal(tempc)*FunctionVal(temp1)<<endl;
+} //cout<<"Before ::" <<"range_1 : "<<range_1<<" range_2: "<<range_2<< " Tempc: " << tempc << " Fxn val : "<< FunctionVal(tempc)*FunctionVal(range_1)<<endl;
     
+
+
+#include <iostream>
+int main (int argc, char* argv[])
+{
+    std::cout<<"Hello World"<<std::endl;
+    return 0;
+}
+
+
+class Person{
+private:
+    int a,b,c,d,e;
+public:
+
+Person(int a,int b,int c,int d, int e):a(a),b(b),c(c),d(d),e(e){}
+
+
+};
+
