@@ -1,113 +1,49 @@
-#include <iostream>
-#include <vector>
+#include<stdio.h>
+#include<math.h>
+#include<stdlib.h>
 
-// this is test for git ok ??
-using namespace std;
-
-class BisectionMethod
+int main()
 {
-    // for function     ax^2 + bx + c = 0;
-    private :    
-    int a,b,c;
-    double root;
-    int NoOfIterations = 100;
-    double range_1,range_2,tempc;
-    
-    
-    public:
-    BisectionMethod(){}
-
-    BisectionMethod(int a,int b, int c): a(a),b(b),c(c), root(-1.0){range_1=6; range_2= 7; tempc = 0;}
-
-    double FunctionVal(double x)
+    int i,j,n,k;
+    float a[50][50],r,s=0,x[50];
+    printf("Enter the number of equations");
+    scanf("%d",&n);
+    printf("Enter the coefficients of equation");
+    for(i=1;i<=n;i++)
     {
-        
-        return (a*x*x + b*x + c);
-    }
-
-    bool CalculateRoot()
-    {   
-      
-        if((FunctionVal(range_1) * FunctionVal(range_2) )> 0 ) return false;
-        while(NoOfIterations>0)
+        for(j=1;j<=n+1;j++)
         {
-        
-              
-        tempc= (range_1 + range_2)/2;
-        if((FunctionVal(tempc)>0 )&& (FunctionVal(range_1)<0)) {range_2 = tempc;} else {range_1 = tempc;}
-         
-        NoOfIterations--;
-            
+            scanf("%f",&a[i][j]);
         }
-      
-        root = tempc;
-        return true;
     }
-
-    void displayRoot()
+    for(j=1;j<=n-1;j++)
     {
-            cout << " Positive Root : "<< root<<endl;
+        for(i=j+1;i<=n;i++)
+        {
+            r=a[i][j]/a[j][j];
+            for(k=1;k<=n+1;k++)
+            {
+                a[i][k]=a[i][k]-r*a[j][k];
+            }
+        }
     }
-
-
-};
-
-class Interpolation
-{
-    private:
-    vector<vector <float>> Val;
-
-    public:
-    Interpolation(){}
-    Interpolation(vector<vector <float>> Value) : Val(Value){}
-
-    bool CreateFxn()
+    x[n]=a[n][n+1]/a[n][n];
+    for(i=n-1;i>=1;i--)
     {
-
-        return false;
+        s=0;
+        for(j=i+1;j<=n;j++)
+        {
+            s=s+a[i][j]*x[j];
+        }
+        x[i]=(a[i][n+1]-s)/a[i][i];
     }
-    
-    double ValueAt(int x)
+    printf("The solutions are:\n");
+    for(i=1;i<=n;i++)
     {
-        return 0.0;
+        printf("x[%d]=%f\n",i,x[i]);
     }
-        
-
-
-};
-
-int main ()
-
-{
-    int a =1, b=-7, c = 2;
-    BisectionMethod SqFxn(a,b,c);
-    if(SqFxn.CalculateRoot()) SqFxn.displayRoot(); else { cout << "Error !! "<<endl;}
-
-    vector<vector<float>> Val = {{2,3},{3,6},{4,12},{5,24}};
-    Interpolation Intp;
-    Intp.CreateFxn();
-    cout << " Val : " << Intp.ValueAt(3);
-
-
-} //cout<<"Before ::" <<"range_1 : "<<range_1<<" range_2: "<<range_2<< " Tempc: " << tempc << " Fxn val : "<< FunctionVal(tempc)*FunctionVal(range_1)<<endl;
-    
-
-
-#include <iostream>
-int main (int argc, char* argv[])
-{
-    std::cout<<"Hello World"<<std::endl;
     return 0;
 }
 
 
-class Person{
-private:
-    int a,b,c,d,e;
-public:
-
-Person(int a,int b,int c,int d, int e):a(a),b(b),c(c),d(d),e(e){}
-
-
-};
 
